@@ -1,0 +1,13 @@
+{
+  "name": "nexus-gaming",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Catálogo de videojuegos con Steam, Epic y RAWG opcional",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "engines": {
+    "node": ">=20.12"
+  }
+}
