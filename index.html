@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NEXUS Gaming: descubre tu próxima aventura. Explora una selección de juegos de acción, carreras y mundos abiertos.">
+  <title>NEXUS Gaming — Tu próximo universo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="header">
+    <a class="brand" href="#inicio" aria-label="NEXUS Gaming, inicio"><span class="brand-icon" aria-hidden="true">✦</span> NEXUS<span> Gaming</span><span class="brand-dot">.</span></a>
+    <nav class="top-nav" aria-label="Navegación principal"><a href="#juegos">Descubrir</a><a href="#biblioteca">Mi biblioteca</a></nav>
+    <button id="open-cart" class="cart-trigger" type="button">Carrito <span id="cart-count">0</span><small>DEMO</small></button>
+  </header>
+  <aside class="sidebar" aria-label="Accesos rápidos">
+    <nav><a class="home-link" href="#inicio" aria-label="Inicio"><span aria-hidden="true">⌂</span></a><a href="#juegos" aria-label="Catálogo de juegos"><span aria-hidden="true">▦</span></a><a href="#biblioteca" aria-label="Mi biblioteca"><span aria-hidden="true">▤</span></a></nav>
+    <span class="sidebar-caption" aria-hidden="true">PLAY. EXPLORE. REPEAT.</span><span class="status-dot" title="Bienvenido al hub"></span>
+  </aside>
+  <main id="contenido">
+    <div id="inicio" class="intro"><p class="eyebrow"><span></span> TU SIGUIENTE NIVEL EMPIEZA AQUÍ</p><p class="edition">PLAYER ONE <span>/</span> EDICIÓN 001</p></div>
+    <section class="catalog" id="juegos" aria-labelledby="catalog-title">
+      <div class="section-heading"><div><p class="eyebrow">ELIGE TU PRÓXIMO RETO</p><h1 id="catalog-title">En el radar<span>.</span></h1></div><span class="section-count" id="result-count">CONECTANDO CON LOS JUEGOS</span></div>
+      <div class="discovery-tabs" role="group" aria-label="Explorar Steam">
+        <button type="button" data-order="catalog" aria-pressed="true">Explorar <span aria-hidden="true">↗</span></button>
+        <button type="button" data-order="popular" aria-pressed="false">Tendencias</button>
+        <button type="button" data-order="recent" aria-pressed="false">Novedades</button>
+        <button type="button" data-order="bestsellers" aria-pressed="false">Más vendidos</button>
+      </div>
+      <form id="catalog-form" class="catalog-toolbar" role="search" aria-label="Buscar videojuegos">
+        <label class="search-field"><span aria-hidden="true">⌕</span><input id="search" type="search" maxlength="100" placeholder="Busca tu próxima aventura…" aria-label="Nombre del videojuego"><button type="submit">Buscar ↗</button></label>
+        <div class="select-row"><label>Catálogo<select id="source"><option value="steam">Steam · catálogo y tendencias</option><option value="epic">Epic · promociones gratuitas</option><option value="rawg">RAWG · PC y consolas</option></select></label><label>Ordenar por<select id="sort"><option value="catalog">Explorar catálogo · Steam</option><option value="popular">Más jugados · Steam</option><option value="recent">Lanzamientos recientes</option><option value="bestsellers">Más vendidos · Steam</option><option value="rating">Mejor puntuación · Metacritic</option><option value="name">Nombre A–Z</option></select></label></div>
+      </form>
+      <div class="catalog-filters"><label>Género<select id="genre"><option value="">Todos los géneros</option></select></label><label>Plataforma<select id="platform"><option value="">Todas las plataformas</option></select></label><label class="check-filter"><input type="checkbox" id="free-only"> Solo gratis</label><button id="saved-toggle" class="subtle-button" type="button" aria-pressed="false">♡ Mis guardados <span id="saved-count">0</span></button><button id="reset-filters" class="reset-button" type="button">Restablecer</button></div>
+      <div class="personal-toolbar"><button id="open-library" class="subtle-button" type="button">Mi biblioteca <span id="library-count">0</span></button><button id="open-compare" class="subtle-button" type="button">Comparar <span id="compare-count">0</span>/2</button><button id="open-history" class="subtle-button" type="button">Compras simuladas</button></div>
+      <details class="advanced-filters"><summary>Más filtros: presupuesto, año y modo de juego</summary><div class="advanced-grid"><label>Presupuesto máximo (MXN)<select id="budget"><option value="">Cualquier precio</option><option value="0">Gratis</option><option value="100">Hasta $100 MXN</option><option value="300">Hasta $300 MXN</option><option value="500">Hasta $500 MXN</option><option value="1000">Hasta $1,000 MXN</option></select></label><label>Año de lanzamiento<input id="release-year" type="number" min="1900" max="2100" step="1" placeholder="Ej. 2024"></label><label>Modo de juego<select id="play-mode"><option value="">Cualquier modo</option><option value="single">Un jugador</option><option value="multi">Multijugador</option><option value="coop">Cooperativo</option></select></label></div><p class="catalog-note">Estos filtros actúan sobre los juegos cargados. Si falta el precio, la fecha o el modo, el juego no aparece al aplicar ese filtro.</p></details>
+      <p id="catalog-status" class="catalog-status" role="status" aria-live="polite">Preparando el catálogo…</p>
+      <p id="shop-status" class="shop-status" role="status" aria-live="polite"></p>
+      <div id="catalog-error" class="empty-state" hidden><h3>No pudimos cargar este catálogo</h3><p id="error-message"></p><button id="retry" class="button" type="button">Reintentar ↗</button></div>
+      <div id="games-grid" class="games-grid" aria-busy="true"></div>
+      <div id="empty-results" class="empty-state" hidden><span aria-hidden="true">◎</span><h3>Otro mundo te está esperando</h3><p>No hay juegos con esta combinación. Prueba otro nombre o restablece los filtros.</p></div>
+      <button id="load-more" class="subtle-button load-more" type="button" hidden>Cargar más juegos ↓</button>
+      <p class="catalog-note" id="catalog-note"></p><p class="catalog-note" id="updated-at"></p>
+      <noscript><p class="empty-state">Activa JavaScript y abre NEXUS Gaming desde su servidor local para consultar los juegos y sus reseñas.</p></noscript>
+    </section>
+    <section id="biblioteca" class="library-section" aria-labelledby="library-title" hidden>
+      <div class="section-heading"><div><p class="eyebrow">TUS JUEGOS, A TU RITMO</p><h2 id="library-title" tabindex="-1">Mi biblioteca<span>.</span></h2></div><a class="subtle-button" href="#juegos">Descubrir juegos ↗</a></div>
+      <p class="catalog-note">Aquí encontrarás los juegos de tus compras simuladas y los que añadas desde sus fichas. Tu progreso y opiniones son privados y se guardan en este navegador.</p>
+      <div id="library-content"></div>
+    </section>
+    <footer><a class="footer-brand" href="#inicio">NEXUS<span> Gaming.</span></a></footer>
+  </main>
+  <dialog id="game-dialog" aria-labelledby="detail-title"><button class="dialog-close" type="button" aria-label="Cerrar ficha">×</button><div id="game-detail"></div></dialog>
+  <dialog id="cart-dialog" aria-labelledby="cart-title">
+    <button id="close-cart" class="dialog-close" type="button" aria-label="Cerrar carrito">×</button>
+    <div class="detail-content"><p class="eyebrow">NEXUS / TIENDA DE DEMOSTRACIÓN</p><h2 id="cart-title">Tu carrito<span>.</span></h2><p class="demo-notice">Compra simulada. Sin pagos reales ni datos bancarios.</p><div id="cart-content"></div></div>
+  </dialog>
+  <script src="app.js" type="module"></script>
+</body>
+</html>
